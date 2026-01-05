@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "fed-speech-mcp"
+version = "1.0.0"
+description = "MCP server for Federal Reserve speeches and testimonies"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Fed Speech MCP Team"}
+]
+keywords = ["mcp", "federal-reserve", "speeches", "finance"]
+
+dependencies = [
+    "mcp>=1.0.0",
+    "httpx>=0.27.0",
+    "feedparser>=6.0.10",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
+    "pydantic>=2.5.0",
+    "python-dateutil>=2.8.2",
+    "fastapi>=0.109.0",
+    "uvicorn>=0.27.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=4.1.0",
+]
+
+[project.scripts]
+fed-speech-mcp = "fed_speech_mcp.server:main"
+fed-speech-http = "fed_speech_mcp.http_server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fed_speech_mcp"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+]
+
